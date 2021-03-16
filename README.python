@@ -1,0 +1,21 @@
+# my-home-work
+import requests
+import json
+api_url_all='https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-7116B6C5-CE8F-4317-9EEC-AACC285A8CC3'
+def retrieval_api(api_url):
+  response = requests.get(api_url)
+
+
+  # print('Status Code: ' + str(response.status_code))
+  return str(response.json())
+location_json = retrieval_api(api_url_all)
+location_json = location_json.replace("\'", "\"")
+#location_json = location_json.replace()
+location_dic = json.loads(location_json)
+
+country = location_dic['records']['location'][7]['locationName']
+weather=location_dic['records']['location'][7]['weatherElement'][0]['time']
+print(country)
+print(str(weather[0]))
+print (str(weather[1]))
+print (str(weather[2]))
